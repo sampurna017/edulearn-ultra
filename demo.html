@@ -13,7 +13,7 @@
   <div class="score">⭐ <span id="score">0</span></div>
 </header>
 
-<!-- VIDEO -->
+<!-- VIDEO PLAYER -->
 <section class="player">
   <iframe 
     id="player"
@@ -22,34 +22,37 @@
   </iframe>
 </section>
 
-<!-- COURSES -->
+<!-- COURSES GRID -->
 <section class="section">
   <h2>Courses</h2>
 
-  <div class="card" onclick="loadVideo('UB1O30fR-EE')">
-    <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
-    <div>
+  <div class="grid">
+
+    <div class="card" onclick="loadVideo('UB1O30fR-EE')">
+      <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
       <h3>HTML Basics</h3>
       <p>Start building websites</p>
     </div>
-  </div>
 
-  <div class="card" onclick="loadVideo('yfoY53QXEnI')">
-    <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
-    <div>
+    <div class="card" onclick="loadVideo('yfoY53QXEnI')">
+      <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
       <h3>CSS Design</h3>
-      <p>Style your UI beautifully</p>
+      <p>Modern UI styling</p>
     </div>
-  </div>
 
-  <div class="card" onclick="loadVideo('PkZNo7MFNFg')">
-    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
-    <div>
+    <div class="card" onclick="loadVideo('PkZNo7MFNFg')">
+      <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
       <h3>JavaScript</h3>
       <p>Make websites interactive</p>
     </div>
-  </div>
 
+    <div class="card" onclick="loadVideo('rfscVS0vtbw')">
+      <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
+      <h3>Python</h3>
+      <p>Full programming course</p>
+    </div>
+
+  </div>
 </section>
 
 <script src="app.js"></script>
