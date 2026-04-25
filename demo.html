@@ -1,55 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduLearn Ultra</title>
+<link rel="stylesheet" href="app.css">
+</head>
+
 <body>
 
 <header class="topbar">
   <h2>EduLearn</h2>
-  <input placeholder="Search tutorials...">
+  <input id="searchInput" placeholder="Search courses...">
 </header>
 
-<div id="player"></div>
+<div class="layout">
 
-<section class="section">
-  <h3>🔥 Featured</h3>
-  <div class="featured" onclick="play('8mAITcNt710','cs')">
-    <img src="https://img.youtube.com/vi/8mAITcNt710/maxresdefault.jpg">
-    <div class="info">
-      <h4>CS50 - Harvard</h4>
-      <p>Complete Computer Science Course</p>
-    </div>
-  </div>
-</section>
+  <aside class="sidebar">
+    <div onclick="filterCategory('all')">🏠 Home</div>
+    <div onclick="filterCategory('web')">💻 Web</div>
+    <div onclick="filterCategory('programming')">🐍 Programming</div>
+    <div onclick="filterCategory('cs')">🎓 CS</div>
+  </aside>
 
-<section class="section">
-  <h3>💻 Web Development</h3>
-  <div class="row">
-    <div class="card" onclick="play('KJ13lX20FqU','html')">
-      <img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
-      <p>HTML Basics</p>
-    </div>
+  <main class="main">
 
-    <div class="card" onclick="play('1Rs2ND1ryYc','css')">
-      <img src="https://img.youtube.com/vi/1Rs2ND1ryYc/0.jpg">
-      <p>CSS Styling</p>
-    </div>
+    <div id="player"></div>
 
-    <div class="card" onclick="play('PkZNo7MFNFg','js')">
-      <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
-      <p>JavaScript</p>
-    </div>
-  </div>
-</section>
+    <!-- DASHBOARD -->
+    <section class="dashboard">
+      <h3>📊 Your Progress</h3>
+      <div class="stats">
+        <div>Videos Watched: <span id="watched">0</span></div>
+        <div>Quiz Score: <span id="totalScore">0</span></div>
+      </div>
+    </section>
 
-<section class="section">
-  <h3>🐍 Programming</h3>
-  <div class="row">
-    <div class="card" onclick="play('rfscVS0vtbw','python')">
-      <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
-      <p>Python Course</p>
-    </div>
-  </div>
-</section>
+    <!-- CONTINUE -->
+    <section>
+      <h3>▶ Continue Watching</h3>
+      <div id="continueGrid" class="grid"></div>
+    </section>
 
-<!-- QUIZ -->
-<div id="quiz"></div>
+    <!-- COURSES -->
+    <section>
+      <h3>Courses</h3>
+      <div id="videoGrid" class="grid">
+
+        <div class="card" data-title="html basics" data-cat="web"
+          onclick="play('KJ13lX20FqU','html')">
+          <img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
+          <p>HTML Basics</p>
+        </div>
+
+        <div class="card" data-title="css styling" data-cat="web"
+          onclick="play('1Rs2ND1ryYc','css')">
+          <img src="https://img.youtube.com/vi/1Rs2ND1ryYc/0.jpg">
+          <p>CSS Styling</p>
+        </div>
+
+        <div class="card" data-title="javascript" data-cat="web"
+          onclick="play('PkZNo7MFNFg','js')">
+          <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
+          <p>JavaScript</p>
+        </div>
+
+        <div class="card" data-title="python course" data-cat="programming"
+          onclick="play('rfscVS0vtbw','python')">
+          <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
+          <p>Python</p>
+        </div>
+
+        <div class="card" data-title="cs50 harvard" data-cat="cs"
+          onclick="play('8mAITcNt710','cs')">
+          <img src="https://img.youtube.com/vi/8mAITcNt710/0.jpg">
+          <p>CS50 Harvard</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <div id="quiz"></div>
+
+  </main>
+</div>
 
 <script src="app.js"></script>
 </body>
+</html>
