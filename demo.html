@@ -9,55 +9,48 @@
 <body>
 
 <header>
-  <h1>🎓 EduLearn</h1>
-  <div class="score-box">
-    ⭐ Score: <span id="score">0</span>
-  </div>
+  <h1>EduLearn</h1>
+  <div class="score">⭐ <span id="score">0</span></div>
 </header>
 
-<main>
+<!-- VIDEO -->
+<section class="player">
+  <iframe 
+    id="player"
+    src="https://www.youtube.com/embed/UB1O30fR-EE"
+    allowfullscreen>
+  </iframe>
+</section>
 
-  <!-- PLAYER -->
-  <section class="player-section">
-    <div class="video-container">
-      <iframe 
-        id="player"
-        src="https://www.youtube.com/embed/UB1O30fR-EE"
-        allowfullscreen>
-      </iframe>
+<!-- COURSES -->
+<section class="section">
+  <h2>Courses</h2>
+
+  <div class="card" onclick="loadVideo('UB1O30fR-EE')">
+    <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
+    <div>
+      <h3>HTML Basics</h3>
+      <p>Start building websites</p>
     </div>
-  </section>
+  </div>
 
-  <!-- COURSES -->
-  <section class="courses">
-    <h2>📺 Learn</h2>
-
-    <div class="grid">
-
-      <div class="card" onclick="loadVideo('UB1O30fR-EE')">
-        <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
-        <p>HTML Basics</p>
-      </div>
-
-      <div class="card" onclick="loadVideo('yfoY53QXEnI')">
-        <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
-        <p>CSS Basics</p>
-      </div>
-
-      <div class="card" onclick="loadVideo('PkZNo7MFNFg')">
-        <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
-        <p>JavaScript</p>
-      </div>
-
-      <div class="card" onclick="loadVideo('rfscVS0vtbw')">
-        <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
-        <p>Python Full Course</p>
-      </div>
-
+  <div class="card" onclick="loadVideo('yfoY53QXEnI')">
+    <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
+    <div>
+      <h3>CSS Design</h3>
+      <p>Style your UI beautifully</p>
     </div>
-  </section>
+  </div>
 
-</main>
+  <div class="card" onclick="loadVideo('PkZNo7MFNFg')">
+    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
+    <div>
+      <h3>JavaScript</h3>
+      <p>Make websites interactive</p>
+    </div>
+  </div>
+
+</section>
 
 <script src="app.js"></script>
 </body>
