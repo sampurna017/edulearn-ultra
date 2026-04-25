@@ -12,4 +12,3 @@ function loadVideo(id) {
     score += 10;
     scoreEl.textContent = score;
   }
-}
