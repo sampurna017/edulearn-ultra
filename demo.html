@@ -1,92 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EduLearn Ultra</title>
-<link rel="stylesheet" href="app.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduLearn</title>
+  <link rel="stylesheet" href="app.css">
 </head>
-
 <body>
 
-<header class="topbar">
-  <h2>EduLearn</h2>
+<header>
+  <h1>EduLearn</h1>
 
-  <input id="searchInput" placeholder="Search courses...">
-
-  <button onclick="toggleTheme()" id="themeBtn">🌙</button>
+  <div class="top-bar">
+    <input type="text" placeholder="Search courses...">
+    <button id="themeToggle">🌙</button>
+  </div>
 </header>
 
-<div class="layout">
+<nav>
+  <p>🏠 Home</p>
+  <p>💻 Web</p>
+  <p>🐍 Programming</p>
+  <p>🎓 CS</p>
+</nav>
 
-  <aside class="sidebar">
-    <div onclick="filterCategory('all')">🏠 Home</div>
-    <div onclick="filterCategory('web')">💻 Web</div>
-    <div onclick="filterCategory('programming')">🐍 Programming</div>
-    <div onclick="filterCategory('cs')">🎓 CS</div>
-  </aside>
+<section class="progress">
+  <h2>📊 Your Progress</h2>
+  <p>Videos Watched: <span id="watched">0</span></p>
+  <p>Quiz Score: 0</p>
+</section>
 
-  <main class="main">
+<section class="player-section">
+  <h2>▶ Continue Watching</h2>
 
-    <div id="player"></div>
+  <div class="video-container">
+    <iframe 
+      id="player"
+      src="https://www.youtube.com/embed/UB1O30fR-EE"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
 
-    <!-- DASHBOARD -->
-    <section class="dashboard">
-      <h3>📊 Your Progress</h3>
-      <div class="stats">
-        <div>Videos Watched: <span id="watched">0</span></div>
-        <div>Quiz Score: <span id="totalScore">0</span></div>
-      </div>
-    </section>
+<section class="courses">
+  <h2>Courses</h2>
 
-    <!-- CONTINUE -->
-    <section>
-      <h3>▶ Continue Watching</h3>
-      <div id="continueGrid" class="grid"></div>
-    </section>
+  <div class="card" onclick="loadVideo('UB1O30fR-EE')">
+    <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
+    <p>HTML Basics</p>
+  </div>
 
-    <!-- COURSES -->
-    <section>
-      <h3>Courses</h3>
-      <div id="videoGrid" class="grid">
+  <div class="card" onclick="loadVideo('yfoY53QXEnI')">
+    <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
+    <p>CSS Basics</p>
+  </div>
 
-        <div class="card" data-title="html basics" data-cat="web"
-          onclick="play('KJ13lX20FqU','html')">
-          <img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
-          <p>HTML Basics</p>
-        </div>
+  <div class="card" onclick="loadVideo('PkZNo7MFNFg')">
+    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
+    <p>JavaScript Basics</p>
+  </div>
 
-        <div class="card" data-title="css styling" data-cat="web"
-          onclick="play('1Rs2ND1ryYc','css')">
-          <img src="https://img.youtube.com/vi/1Rs2ND1ryYc/0.jpg">
-          <p>CSS Styling</p>
-        </div>
-
-        <div class="card" data-title="javascript" data-cat="web"
-          onclick="play('PkZNo7MFNFg','js')">
-          <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
-          <p>JavaScript</p>
-        </div>
-
-        <div class="card" data-title="python course" data-cat="programming"
-          onclick="play('rfscVS0vtbw','python')">
-          <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
-          <p>Python</p>
-        </div>
-
-        <div class="card" data-title="cs50 harvard" data-cat="cs"
-          onclick="play('8mAITcNt710','cs')">
-          <img src="https://img.youtube.com/vi/8mAITcNt710/0.jpg">
-          <p>CS50 Harvard</p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- QUIZ -->
-    <div id="quiz"></div>
-
-  </main>
-</div>
+</section>
 
 <script src="app.js"></script>
 </body>
