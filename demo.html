@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>EduLearn Ultra</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -27,31 +26,14 @@
       padding: 6px 10px;
       border-radius: 20px;
       border: none;
-      width: 50%;
+      width: 45%;
     }
 
-    h2 {
-      margin: 10px;
-      font-size: 16px;
-    }
-
-    .row {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 10px;
-      scroll-snap-type: x mandatory;
-    }
-
-    .card {
-      min-width: 140px;
-      scroll-snap-align: start;
-      cursor: pointer;
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 6px;
+    .score {
+      background: #ff4c60;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: bold;
     }
 
     iframe {
@@ -60,26 +42,80 @@
       border: none;
     }
 
+    #player {
+      display: none;
+    }
+
+    h2 {
+      margin: 12px;
+    }
+
+    /* ROW */
+    .row {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .card {
+      min-width: 140px;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    /* SHORTS */
+    .shorts {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .short {
+      min-width: 100px;
+      height: 180px;
+      background: #222;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* QUIZ */
     #quiz {
       display: none;
       padding: 10px;
+      border-top: 1px solid #222;
     }
 
     button {
-      margin: 5px;
-      padding: 8px;
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
       border: none;
-      border-radius: 5px;
-      background: #ff4c60;
+      border-radius: 6px;
+      background: #222;
       color: white;
     }
 
-    #score {
-      padding: 10px;
-      font-size: 16px;
+    #progress {
+      height: 5px;
+      background: #333;
     }
 
-    /* Bottom nav */
+    #bar {
+      height: 5px;
+      width: 0%;
+      background: #ff4c60;
+    }
+
+    /* NAV */
     .nav {
       position: fixed;
       bottom: 0;
@@ -96,11 +132,26 @@
 <body>
 
 <header>
-  <b>EduLearn</b>
+  <b>🎓 EduLearn</b>
   <input placeholder="Search...">
+  <div class="score">⭐ <span id="score">0</span></div>
 </header>
 
-<h2>Web Dev</h2>
+<div id="player"></div>
+
+<div id="progress"><div id="bar"></div></div>
+
+<h2>🔥 Continue Watching</h2>
+<div class="row" id="continue"></div>
+
+<h2>🎬 Shorts</h2>
+<div class="shorts">
+  <div class="short" onclick="play('PkZNo7MFNFg','js')">JS</div>
+  <div class="short" onclick="play('KJ13lX20FqU','html')">HTML</div>
+  <div class="short" onclick="play('1Rs2ND1ryYc','css')">CSS</div>
+</div>
+
+<h2>💻 Courses</h2>
 <div class="row">
   <div class="card" onclick="play('KJ13lX20FqU','html')">
     <img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
@@ -113,16 +164,11 @@
   <div class="card" onclick="play('PkZNo7MFNFg','js')">
     <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
   </div>
-</div>
 
-<h2>Programming</h2>
-<div class="row">
   <div class="card" onclick="play('rfscVS0vtbw','python')">
     <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
   </div>
 </div>
-
-<div id="player"></div>
 
 <div id="quiz">
   <h3 id="q"></h3>
@@ -131,8 +177,6 @@
   <button onclick="answer('c')" id="c"></button>
   <p id="result"></p>
 </div>
-
-<div id="score">Score: 0</div>
 
 <div class="nav">
   <div>🏠 Home</div>
@@ -176,10 +220,32 @@ const quizData = {
 };
 
 function play(id, type) {
-  document.getElementById("player").innerHTML =
+  let player = document.getElementById("player");
+
+  player.innerHTML =
     `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allowfullscreen></iframe>`;
+  player.style.display = "block";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   document.getElementById("quiz").style.display = "none";
+
+  // progress bar
+  let bar = document.getElementById("bar");
+  bar.style.width = "0%";
+  let i = 0;
+  let interval = setInterval(()=>{
+    i+=1;
+    bar.style.width = i + "%";
+    if(i>=100) clearInterval(interval);
+  },70);
+
+  // continue watching
+  let cont = document.getElementById("continue");
+  cont.innerHTML =
+    `<div class="card">
+      <img src="https://img.youtube.com/vi/${id}/0.jpg">
+    </div>`;
 
   setTimeout(() => showQuiz(type), 7000);
 }
@@ -205,7 +271,7 @@ function answer(ans) {
     document.getElementById("result").innerText = "❌ Wrong";
   }
 
-  document.getElementById("score").innerText = "Score: " + score;
+  document.getElementById("score").innerText = score;
 }
 </script>
 
