@@ -15,47 +15,58 @@
 
 <main>
 
-  <!-- PLAYER -->
-  <section class="player">
-    <iframe 
-      id="player"
-      src="https://www.youtube.com/embed/UB1O30fR-EE"
-      allowfullscreen>
-    </iframe>
-  </section>
+  <!-- LEFT: PLAYER -->
+  <section class="left">
+    <div class="video-box">
+      <iframe 
+        id="player"
+        src="https://www.youtube.com/embed/UB1O30fR-EE"
+        allowfullscreen>
+      </iframe>
+    </div>
 
-  <!-- COURSES -->
-  <section class="courses">
-    <h2>Courses</h2>
-
-    <div class="grid">
-
-      <div class="card" onclick="loadVideo('UB1O30fR-EE')">
-        <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
-        <h3>HTML Basics</h3>
-        <p>Start building websites</p>
-      </div>
-
-      <div class="card" onclick="loadVideo('yfoY53QXEnI')">
-        <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
-        <h3>CSS Design</h3>
-        <p>Modern UI styling</p>
-      </div>
-
-      <div class="card" onclick="loadVideo('PkZNo7MFNFg')">
-        <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
-        <h3>JavaScript</h3>
-        <p>Make websites interactive</p>
-      </div>
-
-      <div class="card" onclick="loadVideo('rfscVS0vtbw')">
-        <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
-        <h3>Python</h3>
-        <p>Full course</p>
-      </div>
-
+    <div class="video-info">
+      <h2 id="videoTitle">HTML Basics</h2>
+      <p>Learn the fundamentals of web development</p>
     </div>
   </section>
+
+  <!-- RIGHT: RECOMMENDED -->
+  <aside class="right">
+
+    <div class="rec-card" onclick="loadVideo('UB1O30fR-EE','HTML Basics')">
+      <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
+      <div>
+        <h4>HTML Basics</h4>
+        <p>Start building websites</p>
+      </div>
+    </div>
+
+    <div class="rec-card" onclick="loadVideo('yfoY53QXEnI','CSS Design')">
+      <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
+      <div>
+        <h4>CSS Design</h4>
+        <p>Modern UI styling</p>
+      </div>
+    </div>
+
+    <div class="rec-card" onclick="loadVideo('PkZNo7MFNFg','JavaScript')">
+      <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
+      <div>
+        <h4>JavaScript</h4>
+        <p>Interactive websites</p>
+      </div>
+    </div>
+
+    <div class="rec-card" onclick="loadVideo('rfscVS0vtbw','Python Course')">
+      <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
+      <div>
+        <h4>Python Course</h4>
+        <p>Full programming guide</p>
+      </div>
+    </div>
+
+  </aside>
 
 </main>
 
