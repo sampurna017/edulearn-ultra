@@ -15,7 +15,7 @@
     header {
       display: flex;
       justify-content: space-between;
-      padding: 12px;
+      padding: 10px;
       background: #111;
       position: sticky;
       top: 0;
@@ -23,7 +23,7 @@
     }
 
     input {
-      padding: 6px 10px;
+      padding: 6px;
       border-radius: 20px;
       border: none;
       width: 45%;
@@ -31,9 +31,8 @@
 
     .score {
       background: #ff4c60;
-      padding: 5px 12px;
+      padding: 5px 10px;
       border-radius: 20px;
-      font-weight: bold;
     }
 
     iframe {
@@ -47,10 +46,9 @@
     }
 
     h2 {
-      margin: 12px;
+      margin: 10px;
     }
 
-    /* ROW */
     .row {
       display: flex;
       overflow-x: auto;
@@ -68,30 +66,32 @@
       border-radius: 6px;
     }
 
-    /* SHORTS */
+    /* Shorts preview */
     .shorts {
       display: flex;
-      overflow-x: auto;
       gap: 10px;
+      overflow-x: auto;
       padding: 10px;
     }
 
     .short {
       min-width: 100px;
       height: 180px;
-      background: #222;
       border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
       cursor: pointer;
     }
 
-    /* QUIZ */
+    .short img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Quiz */
     #quiz {
       display: none;
       padding: 10px;
-      border-top: 1px solid #222;
     }
 
     button {
@@ -104,18 +104,7 @@
       color: white;
     }
 
-    #progress {
-      height: 5px;
-      background: #333;
-    }
-
-    #bar {
-      height: 5px;
-      width: 0%;
-      background: #ff4c60;
-    }
-
-    /* NAV */
+    /* Bottom nav */
     .nav {
       position: fixed;
       bottom: 0;
@@ -126,29 +115,75 @@
       padding: 8px;
       font-size: 12px;
     }
+
+    /* Reels FULLSCREEN */
+    #reels {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: none;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      z-index: 999;
+    }
+
+    .reel {
+      height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .reel iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    .actions {
+      position: absolute;
+      right: 10px;
+      bottom: 80px;
+      font-size: 18px;
+    }
+
+    .close {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: red;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+    }
   </style>
 </head>
 
 <body>
 
 <header>
-  <b>🎓 EduLearn</b>
+  <b>EduLearn</b>
   <input placeholder="Search...">
   <div class="score">⭐ <span id="score">0</span></div>
 </header>
 
 <div id="player"></div>
 
-<div id="progress"><div id="bar"></div></div>
-
 <h2>🔥 Continue Watching</h2>
 <div class="row" id="continue"></div>
 
 <h2>🎬 Shorts</h2>
+<button onclick="openReels()">Open Reels</button>
+
 <div class="shorts">
-  <div class="short" onclick="play('PkZNo7MFNFg','js')">JS</div>
-  <div class="short" onclick="play('KJ13lX20FqU','html')">HTML</div>
-  <div class="short" onclick="play('1Rs2ND1ryYc','css')">CSS</div>
+  <div class="short" onclick="openReels()">
+    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
+  </div>
+  <div class="short" onclick="openReels()">
+    <img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
+  </div>
 </div>
 
 <h2>💻 Courses</h2>
@@ -164,10 +199,6 @@
   <div class="card" onclick="play('PkZNo7MFNFg','js')">
     <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
   </div>
-
-  <div class="card" onclick="play('rfscVS0vtbw','python')">
-    <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
-  </div>
 </div>
 
 <div id="quiz">
@@ -179,9 +210,31 @@
 </div>
 
 <div class="nav">
-  <div>🏠 Home</div>
-  <div>📚 Courses</div>
-  <div>👤 Profile</div>
+  <div onclick="scrollToTop()">🏠 Home</div>
+  <div onclick="scrollCourses()">📚 Courses</div>
+  <div onclick="openReels()">🎬 Shorts</div>
+</div>
+
+<!-- REELS -->
+<div id="reels">
+
+  <div class="reel">
+    <iframe data-id="PkZNo7MFNFg"></iframe>
+    <div class="actions">❤️</div>
+  </div>
+
+  <div class="reel">
+    <iframe data-id="KJ13lX20FqU"></iframe>
+    <div class="actions">❤️</div>
+  </div>
+
+  <div class="reel">
+    <iframe data-id="1Rs2ND1ryYc"></iframe>
+    <div class="actions">❤️</div>
+  </div>
+
+  <button class="close" onclick="closeReels()">✖</button>
+
 </div>
 
 <script>
@@ -189,89 +242,69 @@ let score = 0;
 let correct = "a";
 
 const quizData = {
-  html: {
-    q: "HTML stands for?",
-    a: "Hyper Text Markup Language",
-    b: "Machine Language",
-    c: "Home Tool",
-    correct: "a"
-  },
-  css: {
-    q: "CSS is for?",
-    a: "Structure",
-    b: "Styling",
-    c: "Database",
-    correct: "b"
-  },
-  js: {
-    q: "JS is for?",
-    a: "Styling",
-    b: "Structure",
-    c: "Interactivity",
-    correct: "c"
-  },
-  python: {
-    q: "Python is used for?",
-    a: "AI & Web",
-    b: "Nothing",
-    c: "Only games",
-    correct: "a"
-  }
+  html:{q:"HTML stands for?",a:"Hyper Text Markup Language",b:"Machine",c:"Tool",correct:"a"},
+  css:{q:"CSS is for?",a:"Structure",b:"Styling",c:"DB",correct:"b"},
+  js:{q:"JS is for?",a:"Style",b:"Structure",c:"Interactivity",correct:"c"}
 };
 
-function play(id, type) {
-  let player = document.getElementById("player");
+function play(id,type){
+  let p=document.getElementById("player");
+  p.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allowfullscreen></iframe>`;
+  p.style.display="block";
+  window.scrollTo({top:0,behavior:"smooth"});
 
-  player.innerHTML =
-    `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allowfullscreen></iframe>`;
-  player.style.display = "block";
+  document.getElementById("continue").innerHTML=
+  `<div class="card"><img src="https://img.youtube.com/vi/${id}/0.jpg"></div>`;
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
-
-  document.getElementById("quiz").style.display = "none";
-
-  // progress bar
-  let bar = document.getElementById("bar");
-  bar.style.width = "0%";
-  let i = 0;
-  let interval = setInterval(()=>{
-    i+=1;
-    bar.style.width = i + "%";
-    if(i>=100) clearInterval(interval);
-  },70);
-
-  // continue watching
-  let cont = document.getElementById("continue");
-  cont.innerHTML =
-    `<div class="card">
-      <img src="https://img.youtube.com/vi/${id}/0.jpg">
-    </div>`;
-
-  setTimeout(() => showQuiz(type), 7000);
+  setTimeout(()=>showQuiz(type),6000);
 }
 
-function showQuiz(type) {
-  let q = quizData[type];
-
-  document.getElementById("quiz").style.display = "block";
-  document.getElementById("q").innerText = q.q;
-
-  document.getElementById("a").innerText = q.a;
-  document.getElementById("b").innerText = q.b;
-  document.getElementById("c").innerText = q.c;
-
-  correct = q.correct;
+function showQuiz(type){
+  let q=quizData[type];
+  document.getElementById("quiz").style.display="block";
+  document.getElementById("q").innerText=q.q;
+  document.getElementById("a").innerText=q.a;
+  document.getElementById("b").innerText=q.b;
+  document.getElementById("c").innerText=q.c;
+  correct=q.correct;
 }
 
-function answer(ans) {
-  if (ans === correct) {
-    score++;
-    document.getElementById("result").innerText = "✅ Correct";
-  } else {
-    document.getElementById("result").innerText = "❌ Wrong";
-  }
+function answer(a){
+  if(a===correct){score++;document.getElementById("result").innerText="✅";}
+  else{document.getElementById("result").innerText="❌";}
+  document.getElementById("score").innerText=score;
+}
 
-  document.getElementById("score").innerText = score;
+/* NAV */
+function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"});}
+function scrollCourses(){document.querySelector("h2:last-of-type").scrollIntoView({behavior:"smooth"});}
+
+/* REELS */
+function openReels(){
+  document.getElementById("reels").style.display="block";
+  initReels();
+}
+
+function closeReels(){
+  document.getElementById("reels").style.display="none";
+  document.querySelectorAll(".reel iframe").forEach(f=>f.src="");
+}
+
+function initReels(){
+  let frames=document.querySelectorAll(".reel iframe");
+
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        let id=e.target.dataset.id;
+        e.target.src=`https://www.youtube.com/embed/${id}?autoplay=1&mute=1`;
+      } else {
+        e.target.src="";
+      }
+    });
+  },{threshold:0.7});
+
+  frames.forEach(f=>obs.observe(f));
 }
 </script>
 
