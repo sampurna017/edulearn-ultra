@@ -1,25 +1,45 @@
+:root{
+  --bg:#0f0f0f;
+  --card:#181818;
+  --text:white;
+}
+
+.light{
+  --bg:#ffffff;
+  --card:#f2f2f2;
+  --text:#111;
+}
+
 body{
   margin:0;
   font-family:system-ui;
-  background:#0f0f0f;
-  color:white;
+  background:var(--bg);
+  color:var(--text);
 }
 
 /* TOPBAR */
 .topbar{
   display:flex;
-  justify-content:space-between;
+  gap:10px;
+  align-items:center;
   padding:10px;
-  background:#111;
+  background:var(--card);
   position:sticky;
   top:0;
 }
 
 .topbar input{
-  width:50%;
+  flex:1;
   padding:8px;
   border-radius:20px;
   border:none;
+}
+
+.topbar button{
+  border:none;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
 }
 
 /* LAYOUT */
@@ -28,7 +48,7 @@ body{
 /* SIDEBAR */
 .sidebar{
   width:200px;
-  background:#111;
+  background:var(--card);
   min-height:100vh;
   padding:10px;
 }
@@ -53,16 +73,18 @@ body{
 
 /* CARD */
 .card{
-  background:#181818;
-  border-radius:10px;
+  background:var(--card);
+  border-radius:12px;
   overflow:hidden;
   cursor:pointer;
-  transition:0.3s;
+  transition:0.25s;
 }
 
 .card img{width:100%;}
 
-.card:hover{transform:scale(1.05);}
+.card:hover{
+  transform:translateY(-5px) scale(1.03);
+}
 
 /* PLAYER */
 #player{
@@ -79,22 +101,16 @@ body{
 
 /* DASHBOARD */
 .dashboard{
-  background:#151515;
+  background:var(--card);
   padding:12px;
-  border-radius:10px;
-  margin-bottom:10px;
-}
-
-.stats{
-  display:flex;
-  gap:20px;
+  border-radius:12px;
 }
 
 /* QUIZ */
 #quiz{
-  background:#1a1a1a;
+  background:var(--card);
   padding:15px;
-  border-radius:10px;
+  border-radius:12px;
   margin-top:10px;
 }
 
