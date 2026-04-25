@@ -2,15 +2,13 @@ const player = document.getElementById("player");
 const scoreEl = document.getElementById("score");
 
 let score = 0;
-let watchedVideos = new Set();
+let watched = new Set();
 
-// Load video + scoring
-function loadVideo(videoId) {
-  player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+function loadVideo(id) {
+  player.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
 
-  // Add score only if new video
-  if (!watchedVideos.has(videoId)) {
-    watchedVideos.add(videoId);
+  if (!watched.has(id)) {
+    watched.add(id);
     score += 10;
     scoreEl.textContent = score;
   }
