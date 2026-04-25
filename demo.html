@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EduLearn Mobile</title>
+  <title>EduLearn Ultra</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      font-family: Arial;
+      font-family: system-ui;
       background: #0b0b0f;
       color: white;
     }
@@ -19,8 +17,7 @@
       display: flex;
       justify-content: space-between;
       padding: 12px;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
+      background: #111;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -33,124 +30,65 @@
       width: 50%;
     }
 
-    /* HERO */
-    .hero {
-      height: 180px;
-      background: linear-gradient(to right, black, transparent),
-        url("https://img.youtube.com/vi/PkZNo7MFNFg/maxresdefault.jpg");
-      background-size: cover;
-      display: flex;
-      align-items: flex-end;
-      padding: 15px;
-      animation: fadeIn 1s ease;
-    }
-
-    .hero button {
-      padding: 8px 15px;
-      background: #ff4c60;
-      border: none;
-      border-radius: 6px;
-    }
-
     h2 {
-      margin: 15px;
+      margin: 10px;
+      font-size: 16px;
     }
 
-    /* ROW */
     .row {
       display: flex;
       overflow-x: auto;
-      gap: 12px;
+      gap: 10px;
       padding: 10px;
+      scroll-snap-type: x mandatory;
     }
 
     .card {
       min-width: 140px;
-      transition: 0.3s;
-      animation: slideUp 0.6s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
+      scroll-snap-align: start;
+      cursor: pointer;
     }
 
     .card img {
       width: 100%;
-      border-radius: 8px;
+      border-radius: 6px;
     }
 
     iframe {
       width: 100%;
       height: 220px;
       border: none;
-      margin-top: 10px;
-      animation: fadeIn 0.5s ease;
     }
 
-    /* QUIZ */
     #quiz {
       display: none;
-      margin: 15px;
-      padding: 15px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      animation: fadeIn 0.5s ease;
+      padding: 10px;
     }
 
     button {
       margin: 5px;
-      padding: 10px;
-      border-radius: 6px;
+      padding: 8px;
       border: none;
-      cursor: pointer;
+      border-radius: 5px;
+      background: #ff4c60;
+      color: white;
     }
 
     #score {
-      padding: 15px;
-      font-size: 18px;
+      padding: 10px;
+      font-size: 16px;
     }
 
-    /* BOTTOM NAV (mobile) */
-    .bottom-nav {
+    /* Bottom nav */
+    .nav {
       position: fixed;
       bottom: 0;
       width: 100%;
       background: #111;
       display: flex;
       justify-content: space-around;
-      padding: 10px 0;
-    }
-
-    .bottom-nav div {
-      text-align: center;
+      padding: 8px;
       font-size: 12px;
-      color: #aaa;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    @keyframes slideUp {
-      from {transform: translateY(20px); opacity: 0;}
-      to {transform: translateY(0); opacity: 1;}
-    }
-
-    /* RESPONSIVE */
-    @media(min-width: 768px) {
-      iframe {
-        height: 400px;
-      }
-
-      .card {
-        min-width: 220px;
-      }
-
-      .hero {
-        height: 250px;
-      }
     }
   </style>
 </head>
@@ -158,19 +96,11 @@
 <body>
 
 <header>
-  <h3>🎓 EduLearn</h3>
+  <b>EduLearn</b>
   <input placeholder="Search...">
 </header>
 
-<!-- HERO -->
-<div class="hero">
-  <div>
-    <h3>JavaScript Course</h3>
-    <button onclick="play('PkZNo7MFNFg','js')">▶ Play</button>
-  </div>
-</div>
-
-<h2>Web Development</h2>
+<h2>Web Dev</h2>
 <div class="row">
   <div class="card" onclick="play('KJ13lX20FqU','html')">
     <img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
@@ -204,8 +134,7 @@
 
 <div id="score">Score: 0</div>
 
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
+<div class="nav">
   <div>🏠 Home</div>
   <div>📚 Courses</div>
   <div>👤 Profile</div>
@@ -219,19 +148,19 @@ const quizData = {
   html: {
     q: "HTML stands for?",
     a: "Hyper Text Markup Language",
-    b: "High Machine Language",
+    b: "Machine Language",
     c: "Home Tool",
     correct: "a"
   },
   css: {
-    q: "CSS is used for?",
+    q: "CSS is for?",
     a: "Structure",
     b: "Styling",
-    c: "Backend",
+    c: "Database",
     correct: "b"
   },
   js: {
-    q: "JS is used for?",
+    q: "JS is for?",
     a: "Styling",
     b: "Structure",
     c: "Interactivity",
@@ -252,7 +181,7 @@ function play(id, type) {
 
   document.getElementById("quiz").style.display = "none";
 
-  setTimeout(() => showQuiz(type), 8000);
+  setTimeout(() => showQuiz(type), 7000);
 }
 
 function showQuiz(type) {
@@ -271,9 +200,9 @@ function showQuiz(type) {
 function answer(ans) {
   if (ans === correct) {
     score++;
-    document.getElementById("result").innerText = "✅ Correct!";
+    document.getElementById("result").innerText = "✅ Correct";
   } else {
-    document.getElementById("result").innerText = "❌ Wrong!";
+    document.getElementById("result").innerText = "❌ Wrong";
   }
 
   document.getElementById("score").innerText = "Score: " + score;
