@@ -4,12 +4,12 @@
   box-sizing: border-box;
 }
 
-/* DARK BLUE UI */
+/* 🌑 DEEP BLUE GRADIENT */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(180deg, #0b1a33, #050d1f);
-  color: #e6ecff;
-  padding: 15px;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: linear-gradient(180deg, #081226, #020617);
+  color: #e2e8f0;
+  padding: 16px;
 }
 
 /* HEADER */
@@ -17,65 +17,89 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
+header h1 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* SCORE */
 .score {
   background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
   padding: 8px 14px;
-  border-radius: 20px;
+  border-radius: 999px;
+  font-size: 14px;
 }
 
 /* PLAYER */
 .player iframe {
   width: 100%;
   height: 220px;
-  border-radius: 16px;
+  border-radius: 18px;
   border: none;
-  margin-bottom: 25px;
+  margin-bottom: 24px;
+
+  /* GLASS EFFECT */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 /* SECTION */
-.section h2 {
-  margin-bottom: 15px;
+.courses h2 {
+  margin-bottom: 12px;
+  font-size: 18px;
 }
 
-/* ✅ YOUTUBE STYLE GRID */
+/* GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px;
 }
 
-/* CARD */
+/* 🟦 CARD */
 .card {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 10px;
   cursor: pointer;
-  transition: 0.25s;
+  transition: all 0.25s ease;
 }
 
+/* IMAGE */
 .card img {
   width: 100%;
   border-radius: 12px;
 }
 
+/* TEXT */
 .card h3 {
   margin-top: 8px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .card p {
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.7;
 }
 
 /* HOVER */
 .card:hover {
-  transform: scale(1.05);
+  transform: translateY(-4px) scale(1.02);
+  background: rgba(255,255,255,0.12);
 }
 
-/* DESKTOP PLAYER */
+/* 📱 RESPONSIVE */
 @media (min-width: 768px) {
   .player iframe {
-    height: 400px;
+    height: 420px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   }
 }
