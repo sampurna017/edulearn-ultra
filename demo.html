@@ -9,29 +9,11 @@
 <body>
 
 <header>
-  <h1>EduLearn</h1>
-
-  <div class="top-bar">
-    <input type="text" placeholder="Search courses...">
-    <button id="themeToggle">🌙</button>
-  </div>
+  <h1>🎓 EduLearn</h1>
 </header>
 
-<nav>
-  <p>🏠 Home</p>
-  <p>💻 Web</p>
-  <p>🐍 Programming</p>
-  <p>🎓 CS</p>
-</nav>
-
-<section class="progress">
-  <h2>📊 Your Progress</h2>
-  <p>Videos Watched: <span id="watched">0</span></p>
-  <p>Quiz Score: 0</p>
-</section>
-
 <section class="player-section">
-  <h2>▶ Continue Watching</h2>
+  <h2>▶ Now Playing</h2>
 
   <div class="video-container">
     <iframe 
@@ -45,23 +27,31 @@
 </section>
 
 <section class="courses">
-  <h2>Courses</h2>
+  <h2>📺 Courses</h2>
 
-  <div class="card" onclick="loadVideo('UB1O30fR-EE')">
-    <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
-    <p>HTML Basics</p>
+  <div class="grid">
+
+    <div class="card" onclick="loadVideo('UB1O30fR-EE')">
+      <img src="https://img.youtube.com/vi/UB1O30fR-EE/0.jpg">
+      <p>HTML Basics</p>
+    </div>
+
+    <div class="card" onclick="loadVideo('yfoY53QXEnI')">
+      <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
+      <p>CSS Basics</p>
+    </div>
+
+    <div class="card" onclick="loadVideo('PkZNo7MFNFg')">
+      <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
+      <p>JavaScript Basics</p>
+    </div>
+
+    <div class="card" onclick="loadVideo('rfscVS0vtbw')">
+      <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
+      <p>Python Full Course</p>
+    </div>
+
   </div>
-
-  <div class="card" onclick="loadVideo('yfoY53QXEnI')">
-    <img src="https://img.youtube.com/vi/yfoY53QXEnI/0.jpg">
-    <p>CSS Basics</p>
-  </div>
-
-  <div class="card" onclick="loadVideo('PkZNo7MFNFg')">
-    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
-    <p>JavaScript Basics</p>
-  </div>
-
 </section>
 
 <script src="app.js"></script>
