@@ -1,17 +1,173 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EduLearn Demo</title>
+  <title>EduLearn</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0f0f0f;
+      color: white;
+      font-family: Arial;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      background: #111;
+    }
+
+    input {
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .row {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .card {
+      min-width: 200px;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      margin-top: 20px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #quiz {
+      display: none;
+      padding: 20px;
+    }
+  </style>
 </head>
-<body style="background:black; color:white; text-align:center; font-family:sans-serif;">
-  <h1>🎬 EduLearn Demo</h1>
-  <p>This is your demo project page</p>
 
-  <video width="90%" controls>
-    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-  </video>
+<body>
 
-  <br><br>
-  <a href="index.html" style="color:cyan;">⬅ Back to Portfolio</a>
+<header>
+  <h3>🎓 EduLearn</h3>
+  <input placeholder="Search..." onkeyup="search(this.value)">
+</header>
+
+<h2>Courses</h2>
+
+<div class="row">
+  <div class="card" onclick="play('KJ13lX20FqU','html')">
+    <img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
+  </div>
+
+  <div class="card" onclick="play('1Rs2ND1ryYc','css')">
+    <img src="https://img.youtube.com/vi/1Rs2ND1ryYc/0.jpg">
+  </div>
+
+  <div class="card" onclick="play('PkZNo7MFNFg','js')">
+    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
+  </div>
+</div>
+
+<div id="player"></div>
+
+<!-- QUIZ -->
+<div id="quiz">
+  <h3 id="q"></h3>
+  <button onclick="answer('a')" id="a"></button>
+  <button onclick="answer('b')" id="b"></button>
+  <button onclick="answer('c')" id="c"></button>
+  <p id="result"></p>
+</div>
+
+<!-- SCORE -->
+<h3 style="padding:20px;">Score: <span id="score">0</span></h3>
+
+<script>
+let score = 0;
+let correct = "a";
+
+const quizData = {
+  html: {
+    q: "What does HTML stand for?",
+    a: "Hyper Text Markup Language",
+    b: "High Tool Machine Language",
+    c: "Home Tool Markup Language",
+    correct: "a"
+  },
+  css: {
+    q: "What is CSS used for?",
+    a: "Structure",
+    b: "Styling",
+    c: "Database",
+    correct: "b"
+  },
+  js: {
+    q: "JavaScript is used for?",
+    a: "Styling",
+    b: "Structure",
+    c: "Interactivity",
+    correct: "c"
+  }
+};
+
+function play(id, type) {
+  document.getElementById("player").innerHTML =
+    `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1"></iframe>`;
+
+  document.getElementById("quiz").style.display = "none";
+
+  setTimeout(() => showQuiz(type), 8000);
+}
+
+function showQuiz(type) {
+  let q = quizData[type];
+
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("q").innerText = q.q;
+
+  document.getElementById("a").innerText = q.a;
+  document.getElementById("b").innerText = q.b;
+  document.getElementById("c").innerText = q.c;
+
+  correct = q.correct;
+}
+
+function answer(ans) {
+  if (ans === correct) {
+    score++;
+    document.getElementById("result").innerText = "✅ Correct!";
+  } else {
+    document.getElementById("result").innerText = "❌ Wrong!";
+  }
+
+  document.getElementById("score").innerText = score;
+}
+
+function search(val) {
+  val = val.toLowerCase();
+
+  document.querySelectorAll(".card").forEach(c=>{
+    c.style.display = val === "" ? "block" : "none";
+  });
+}
+</script>
+
 </body>
 </html>
