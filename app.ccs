@@ -4,11 +4,12 @@
   box-sizing: border-box;
 }
 
-/* DARK UI */
+/* DARK BLUE UI */
 body {
-  font-family: Arial, sans-serif;
-  background: #0b0b0b;
-  color: #eaeaea;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg, #0b1a33, #050d1f);
+  color: #e6ecff;
+  padding: 15px;
 }
 
 /* HEADER */
@@ -16,90 +17,65 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #1f1f1f;
+  margin-bottom: 20px;
 }
 
-header h1 {
-  font-size: 20px;
-}
-
-.score-box {
-  background: #1a1a1a;
-  padding: 8px 15px;
+.score {
+  background: rgba(255,255,255,0.08);
+  padding: 8px 14px;
   border-radius: 20px;
-  font-size: 14px;
-}
-
-/* MAIN */
-main {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
-  padding: 20px;
 }
 
 /* PLAYER */
-.video-container {
+.player iframe {
   width: 100%;
-  aspect-ratio: 16 / 9;
-}
-
-iframe {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
+  height: 220px;
+  border-radius: 16px;
   border: none;
+  margin-bottom: 25px;
 }
 
-/* COURSES SIDE PANEL */
-.courses h2 {
-  margin-bottom: 10px;
+/* SECTION */
+.section h2 {
+  margin-bottom: 15px;
 }
 
+/* ✅ YOUTUBE STYLE GRID */
 .grid {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
 }
 
 /* CARD */
 .card {
-  display: flex;
-  gap: 10px;
   cursor: pointer;
-  background: #141414;
-  padding: 8px;
-  border-radius: 10px;
-  transition: 0.2s;
+  transition: 0.25s;
 }
 
 .card img {
-  width: 120px;
-  border-radius: 8px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.card h3 {
+  margin-top: 8px;
+  font-size: 15px;
 }
 
 .card p {
-  font-size: 14px;
+  font-size: 13px;
+  opacity: 0.7;
 }
 
+/* HOVER */
 .card:hover {
-  background: #1f1f1f;
-  transform: scale(1.02);
+  transform: scale(1.05);
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-  main {
-    grid-template-columns: 1fr;
-  }
-
-  .grid {
-    flex-direction: row;
-    overflow-x: auto;
-  }
-
-  .card {
-    min-width: 200px;
+/* DESKTOP PLAYER */
+@media (min-width: 768px) {
+  .player iframe {
+    height: 400px;
   }
 }
