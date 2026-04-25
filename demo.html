@@ -1,159 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EduLearn Ultra</title>
-
-<style>
-body {margin:0;font-family:system-ui;background:#0b0b0f;color:white;}
-header{display:flex;justify-content:space-between;padding:10px;background:#111;position:sticky;top:0;}
-input{padding:6px;border-radius:20px;border:none;width:45%;}
-.score{background:#ff4c60;padding:5px 10px;border-radius:20px;}
-h2{margin:10px;}
-.row,.shorts{display:flex;overflow-x:auto;gap:10px;padding:10px;}
-.card,.short{min-width:140px;cursor:pointer;}
-.card img,.short img{width:100%;border-radius:6px;}
-#player{display:none;}
-iframe{width:100%;height:220px;border:none;}
-#quiz{display:none;padding:10px;}
-button{width:100%;padding:10px;margin:5px 0;background:#222;color:white;border:none;border-radius:6px;}
-.nav{position:fixed;bottom:0;width:100%;background:#111;display:flex;justify-content:space-around;padding:8px;}
-
-#reels{position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:none;overflow-y:scroll;scroll-snap-type:y mandatory;}
-.reel{height:100vh;scroll-snap-align:start;}
-.reel iframe{height:100%;width:100%;}
-.close{position:fixed;top:10px;right:10px;background:red;color:white;border:none;padding:10px;border-radius:50%;}
-</style>
-</head>
-
 <body>
 
-<header>
-<b>EduLearn</b>
-<input placeholder="Search...">
-<div class="score">⭐ <span id="score">0</span></div>
+<header class="topbar">
+  <h2>EduLearn</h2>
+  <input placeholder="Search tutorials...">
 </header>
 
 <div id="player"></div>
 
-<h2>🔥 Continue Watching</h2>
-<div class="row" id="continue"></div>
+<section class="section">
+  <h3>🔥 Featured</h3>
+  <div class="featured" onclick="play('8mAITcNt710','cs')">
+    <img src="https://img.youtube.com/vi/8mAITcNt710/maxresdefault.jpg">
+    <div class="info">
+      <h4>CS50 - Harvard</h4>
+      <p>Complete Computer Science Course</p>
+    </div>
+  </div>
+</section>
 
-<h2>🎬 Shorts</h2>
-<button onclick="openReels()">Open Shorts</button>
+<section class="section">
+  <h3>💻 Web Development</h3>
+  <div class="row">
+    <div class="card" onclick="play('KJ13lX20FqU','html')">
+      <img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
+      <p>HTML Basics</p>
+    </div>
 
-<div class="shorts">
-<div class="short" onclick="openReels()">
-<img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
-</div>
-<div class="short" onclick="openReels()">
-<img src="https://img.youtube.com/vi/KJ13lX20FqU/0.jpg">
-</div>
-</div>
+    <div class="card" onclick="play('1Rs2ND1ryYc','css')">
+      <img src="https://img.youtube.com/vi/1Rs2ND1ryYc/0.jpg">
+      <p>CSS Styling</p>
+    </div>
 
-<h2>💻 Courses</h2>
-<div class="row">
-<div class="card" onclick="play('8mAITcNt710','cs')">
-<img src="https://img.youtube.com/vi/8mAITcNt710/0.jpg">
-</div>
-<div class="card" onclick="play('rfscVS0vtbw','python')">
-<img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
-</div>
-<div class="card" onclick="play('PkZNo7MFNFg','js')">
-<img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
-</div>
-</div>
+    <div class="card" onclick="play('PkZNo7MFNFg','js')">
+      <img src="https://img.youtube.com/vi/PkZNo7MFNFg/0.jpg">
+      <p>JavaScript</p>
+    </div>
+  </div>
+</section>
 
-<div id="quiz">
-<h3 id="q"></h3>
-<button onclick="answer('a')" id="a"></button>
-<button onclick="answer('b')" id="b"></button>
-<button onclick="answer('c')" id="c"></button>
-<p id="result"></p>
-</div>
+<section class="section">
+  <h3>🐍 Programming</h3>
+  <div class="row">
+    <div class="card" onclick="play('rfscVS0vtbw','python')">
+      <img src="https://img.youtube.com/vi/rfscVS0vtbw/0.jpg">
+      <p>Python Course</p>
+    </div>
+  </div>
+</section>
 
-<div class="nav">
-<div onclick="topScroll()">🏠 Home</div>
-<div onclick="courseScroll()">📚 Courses</div>
-<div onclick="openReels()">🎬 Shorts</div>
-</div>
+<!-- QUIZ -->
+<div id="quiz"></div>
 
-<!-- REELS -->
-<div id="reels">
-<div class="reel" data-id="PkZNo7MFNFg"></div>
-<div class="reel" data-id="KJ13lX20FqU"></div>
-<div class="reel" data-id="1Rs2ND1ryYc"></div>
-<button class="close" onclick="closeReels()">✖</button>
-</div>
-
-<script>
-let score=0,correct="a";
-
-const quizData={
-cs:{q:"CS50 is from?",a:"Harvard",b:"MIT",c:"Google",correct:"a"},
-python:{q:"Python used for?",a:"AI & Web",b:"Nothing",c:"Only games",correct:"a"},
-js:{q:"JS is for?",a:"Style",b:"Structure",c:"Interactivity",correct:"c"}
-};
-
-function play(id,type){
-let p=document.getElementById("player");
-p.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allowfullscreen></iframe>`;
-p.style.display="block";
-window.scrollTo({top:0,behavior:"smooth"});
-document.getElementById("continue").innerHTML=
-`<div class="card"><img src="https://img.youtube.com/vi/${id}/0.jpg"></div>`;
-setTimeout(()=>showQuiz(type),5000);
-}
-
-function showQuiz(type){
-let q=quizData[type];
-document.getElementById("quiz").style.display="block";
-document.getElementById("q").innerText=q.q;
-document.getElementById("a").innerText=q.a;
-document.getElementById("b").innerText=q.b;
-document.getElementById("c").innerText=q.c;
-correct=q.correct;
-}
-
-function answer(a){
-if(a===correct){score++;document.getElementById("result").innerText="✅";}
-else{document.getElementById("result").innerText="❌";}
-document.getElementById("score").innerText=score;
-}
-
-/* NAV */
-function topScroll(){window.scrollTo({top:0,behavior:"smooth"});}
-function courseScroll(){document.querySelector("h2:last-of-type").scrollIntoView({behavior:"smooth"});}
-
-/* REELS */
-function openReels(){
-document.getElementById("reels").style.display="block";
-initReels();
-}
-
-function closeReels(){
-document.getElementById("reels").style.display="none";
-document.querySelectorAll(".reel").forEach(r=>r.innerHTML="");
-}
-
-function initReels(){
-let reels=document.querySelectorAll(".reel");
-
-const obs=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-let id=e.target.dataset.id;
-e.target.innerHTML=
-`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1" allowfullscreen></iframe>`;
-}else{
-e.target.innerHTML="";
-}
-});
-},{threshold:0.7});
-
-reels.forEach(r=>obs.observe(r));
-}
-</script>
-
+<script src="app.js"></script>
 </body>
-</html>
