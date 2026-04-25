@@ -19,6 +19,18 @@ const quizData = {
   ]
 };
 
+// THEME
+function toggleTheme(){
+  document.body.classList.toggle("light");
+
+  let isLight = document.body.classList.contains("light");
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+
+  document.getElementById("themeBtn").innerText =
+    isLight ? "☀️" : "🌙";
+}
+
+// PLAY
 function play(id,type){
   let player=document.getElementById("player");
 
@@ -38,9 +50,10 @@ function play(id,type){
   updateStats();
   loadContinue();
 
-  setTimeout(showQuiz,4000);
+  setTimeout(showQuiz,3000);
 }
 
+// QUIZ
 function showQuiz(){
   let q = quizData[currentType][qIndex];
 
@@ -66,21 +79,18 @@ function answer(correct,ans){
     showToast("Try again");
   }
 
-  nextQuestion();
-}
-
-function nextQuestion(){
   qIndex++;
-  if(qIndex < quizData[currentType].length){
-    setTimeout(showQuiz,1000);
-  }else{
-    document.getElementById("quiz").innerHTML=`
-      <h3>Quiz Done 🎉</h3>
-      <p>Score: ${score}</p>
-    `;
-  }
+  setTimeout(()=>{
+    if(qIndex < quizData[currentType].length){
+      showQuiz();
+    }else{
+      document.getElementById("quiz").innerHTML=
+        `<h3>Quiz Done 🎉</h3><p>Score: ${score}</p>`;
+    }
+  },1000);
 }
 
+// CONTINUE
 function loadContinue(){
   let data=JSON.parse(localStorage.getItem("lastVideo"));
   if(!data) return;
@@ -93,6 +103,7 @@ function loadContinue(){
   `;
 }
 
+// SEARCH
 document.getElementById("searchInput")?.addEventListener("input",function(){
   let val=this.value.toLowerCase();
   document.querySelectorAll(".card").forEach(c=>{
@@ -100,12 +111,14 @@ document.getElementById("searchInput")?.addEventListener("input",function(){
   });
 });
 
+// FILTER
 function filterCategory(cat){
   document.querySelectorAll(".card").forEach(c=>{
     c.style.display=(cat==="all"||c.dataset.cat===cat)?"block":"none";
   });
 }
 
+// STATS
 function updateStats(){
   document.getElementById("watched").innerText =
     localStorage.getItem("watched") || 0;
@@ -114,6 +127,7 @@ function updateStats(){
     localStorage.getItem("score") || 0;
 }
 
+// TOAST
 function showToast(msg){
   let t=document.createElement("div");
   t.className="toast";
@@ -122,9 +136,16 @@ function showToast(msg){
   setTimeout(()=>t.remove(),1500);
 }
 
+// LOAD
 window.onload=()=>{
   watchedCount = Number(localStorage.getItem("watched")) || 0;
   score = Number(localStorage.getItem("score")) || 0;
+
+  let savedTheme = localStorage.getItem("theme");
+  if(savedTheme === "light"){
+    document.body.classList.add("light");
+    document.getElementById("themeBtn").innerText="☀️";
+  }
 
   loadContinue();
   updateStats();
